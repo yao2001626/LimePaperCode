@@ -1,0 +1,43 @@
+/* Compile under Linux with "limec pingpong.lime"; run with "./pingpong 1000".
+
+There are two classes, Ping and Pong, defining active objects. One object of
+each class is created. Each class defines a method that calls the object of the
+other class, passing along the number of remaining bounces, and defines a method
+for receiving the "ball". The Ping object "knows" about the Pong object; when
+calling that object, it passes itself as a parameter, so the Pong object can
+call back.
+
+A Lime program terminates when the main program terminates and all actions of
+all objects are disabled. Here, when the number of remaining bounces of the ball
+reaches 0, all objects are disabled and the program terminates.
+*/
+class Ping
+  var other: Pong
+  var bounces: int
+  init(o: Pong, t: int)
+    other, bounces := o, t
+  method ping(b: int)
+    bounces := b
+  action pong
+    when bounces > 0 do
+      other.pong(this, bounces - 1)
+      bounces := 0
+class Pong
+  var other: Ping
+  var bounces: int
+  init()
+    bounces := 0
+  method pong(o: Ping, b: int)
+    other, bounces := o, b
+  action ping
+    when bounces > 0 do
+      other.ping(bounces)
+      bounces := 0
+class Start
+  var ping: Ping
+  var pong: Pong
+  var tokens: int
+  init()
+    tokens := getArg(1)
+    pong := new Pong()
+    ping := new Ping(pong, tokens)
