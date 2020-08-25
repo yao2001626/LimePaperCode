@@ -15,3 +15,7 @@ is decremented by both Ping and Pong. The program terminates when it reaches 0.
 
 The constants used in the implementations are:
 - Rounds: the number of bounces of the ball
+
+# Result
+
+![](ex_PingPong.png)
