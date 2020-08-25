@@ -1,0 +1,716 @@
+#!/usr/bin/perl
+
+print "gnuplotme v0.6 by hani jamjoom\n";
+
+$usage =  " see http://jamjoom.net/tools/gnuplotme for complete info.\n\n ".
+          " gnuplotme --help\n" .
+	  "                 --outfile <file_base_name> [eps | jpeg | png]\n" . 
+	  "                 --file <file_name> <plot_label> <column>\n" .
+	  "                 --xlabel <x_axes_label>\n" .
+	  "                 --ylabel <y_axes_label> [<axis>]\n" .	      
+	  "                 --xrange <low:hi> \n" .
+	  "                 --yrange <low:hi> [<axis>]\n" .
+	  "                 --title <title>\n" .
+	  "                 --key <x,y>\n" .    
+	  "                 --percent  [left,right,both]\n" .
+	  "                 --log_scale <x or y or xy>\n\n" .
+	  "                 --subsample <period>\n\n" .
+	  "           advanced options:\n" .
+	  "                 --set  <variable_name> { {file  <filename> <column>} |\n" .
+	  "                                          {range low high step} |\n" .
+	  "                                          {list  y1 y2 y3 ... } |\n" .
+          "                                          {avg   <column> <outliers> <conf> file1 file2 ... }}\n".
+	  "                 --plot  <function> <plot_label> [<axis>]\n" .
+	  "                 --ytics <low,step,hi> [<axis>]\n\n";
+
+# Table for T-Distribution.  The last element of each entry is for very large (infinity)
+# population sizes.
+
+%tdist = ( 20 => [ .325, .289, .277, .271, .267, .265, .263, .262, .261, .260, 
+	      .260, .259, .259, .258, .258, .258, .257, .257, .257, .257, 
+	      .257, .256, .256, .256, .256, .256, .256, .256, .256, .256, 
+	      .253 ],
+	   40 => [ .727, .617, .584, .569, .559, .553, .549, .546, .543, .542,
+	      .540, .539, .538, .537, .536, .535, .534, .534, .533, .533,
+	      .532, .532, .532, .531, .531, .531, .531, .530, .530, .530,
+	      .524 ],
+	   60 => [ 1.367, 1.061, .978, .941, .920, .906, .896, .889, .883, .879,
+	      .876, .873, .870, .868, .866, .865, .863, .862, .861, .860,
+	      .859, .858, .858, .857, .856, .856, .855, .855, .854, .854,
+	      .842 ],
+	   80 => [ 3.078, 1.886, 1.638, 1.533, 1.476, 1.440, 1.415, 1.397, 1.383, 1.372,
+	      1.363, 1.356, 1.350, 1.345, 1.341, 1.337, 1.333, 1.330, 1.328, 1.325,
+	      1.323, 1.321, 1.319, 1.316, 1.316, 1.315, 1.314, 1.313, 1.310, 1.310,
+	      1.282 ],
+	   90 => [ 6.314, 2.920, 2.353, 2.132, 2.015, 1.943, 1.895, 1.860, 1.833, 1.812,
+	      1.796, 1.782, 1.771, 1.761, 1.753, 1.746, 1.740, 1.734, 1.729, 1.725,
+	      1.721, 1.717, 1.714, 1.708, 1.708, 1.706, 1.703, 1.701, 1.697, 1.697,
+	      1.645 ],
+	   95 => [ 12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228,
+	      2.201, 2.179, 2.160, 2.145, 2.131, 2.120, 2.110, 2.101, 2.093, 2.086,
+	      2.080, 2.074, 2.069, 2.060, 2.060, 2.056, 2.052, 2.048, 2.042, 2.042,
+	      1.960 ],
+	   98 => [ 31.821, 6.965, 4.541, 3.747, 3.365, 3.143, 2.998, 2.896, 2.821, 2.764,
+	      2.718, 2.681, 2.650, 2.624, 2.602, 2.583, 2.567, 2.552, 2.539, 2.528,
+	      2.518, 2.508, 2.500, 2.485, 2.485, 2.479, 2.473, 2.467, 2.457, 2.457,
+	      2.326 ],
+	   99 => [ 63.657, 9.925, 5.841, 4.604, 4.032, 3.707, 3.499, 3.355, 3.250, 3.169,
+	      3.106, 3.055, 3.012, 2.977, 2.947, 2.921, 2.898, 2.878, 2.861, 2.845,
+	      2.831, 2.819, 2.807, 2.787, 2.787, 2.779, 2.771, 2.763, 2.750, 2.750,
+	      2.576 ]  );
+
+$tdist_infinity = 30;
+
+sub numerically { $a <=> $b }
+
+if ( $#ARGV < 0 ) {
+    print "USAGE: $usage";
+
+    exit(0);
+}
+
+# PARSE OPTIONS
+
+$log_scale = 0;
+$i=0;
+$j=0;
+$subsample = 1 ;
+$var_cnt_min = 9999;
+$func_cnt = 0;
+$file_cnt = 0;
+
+while ( $#ARGV >= 0 ) {
+
+    $in_arg = shift(@ARGV);
+
+
+    if ( $in_arg eq "--help" ) {
+
+	print "$usage";
+	exit(0);
+
+    } elsif ( $in_arg eq "--log_scale" ) {
+	
+	$log_scale = shift(@ARGV);
+
+	if ( ($log_scale ne "x") && ($log_scale ne "y") && ($log_scale ne "xy") ) {
+	    print "SYNTAX ERROR: --log_scale option must either be x, y, or xy.\n";
+	    exit(0);	    
+	} 
+
+    } elsif ( $in_arg eq "--subsample" ) {
+	
+	$subsample = shift(@ARGV);
+
+    } elsif ( $in_arg eq "--confidence" ) {
+	
+	$subsample = shift(@ARGV);
+
+    } elsif ( $in_arg eq "--percent" ) {
+	
+	$percent = shift(@ARGV);
+
+	if ( ($percent ne "left") && ($percent ne "right") && ($percent ne "both") ) {
+	    print "SYNTAX ERROR: --percent option must either be left, right, or both.\n";
+	    exit(0);	    
+	} 
+
+    } elsif ( $in_arg eq "--xlabel" ) {
+
+	$xlabel  = shift(@ARGV);
+
+    } elsif ( $in_arg eq "--xrange" ) {
+
+	$x_range  = shift(@ARGV);
+
+    } elsif ( $in_arg eq "--title" ) {
+
+	$title  = shift(@ARGV);
+
+    } elsif ( $in_arg eq "--ytics" ) {
+
+	$tmp1 = shift(@ARGV);
+	$tmp2 = shift(@ARGV);
+	
+ 	if ($tmp2 ne "" ) {
+	    if (($tmp2 eq "left") || ($tmp2 eq "right")) {
+	    
+		if ($tmp2 eq "left") {
+		    $y_tics  = $tmp1;
+		}
+
+		if ($tmp2 eq "right") {
+		    $y_tics_right  = $tmp1;
+		}
+
+	    } elsif ( index($tmp2,"--") == -1 ) {
+		print "SYNTAX ERROR: --ytics second option must either be left or right.\n";
+		exit(0);	    
+	    } else {
+		$y_tics  = $tmp1;
+		unshift(@ARGV,$tmp2);
+	    }
+
+	} else {
+	    $y_tics  = $tmp1;
+	}
+
+    } elsif ( $in_arg eq "--yrange" ) {
+
+	$tmp1 = shift(@ARGV);
+	$tmp2 = shift(@ARGV);
+	
+ 	if ($tmp2 ne "" ) {
+	    if (($tmp2 eq "left") || ($tmp2 eq "right")) {
+	    
+		if ($tmp2 eq "left") {
+		    $y_range  = $tmp1;
+		}
+
+		if ($tmp2 eq "right") {
+		    $y_range_right  = $tmp1;
+		}
+
+	    } elsif ( index($tmp2,"--") == -1 ) {
+		print "SYNTAX ERROR: --yrange second option must either be left or right.\n";
+		exit(0);	    
+	    } else {
+		$y_range  = $tmp1;
+		unshift(@ARGV,$tmp2);
+	    }
+
+	} else {
+	    $y_range  = $tmp1;
+	}
+
+    } elsif ( $in_arg eq "--ylabel" ) {
+
+	$tmp1 = shift(@ARGV);
+	$tmp2 = shift(@ARGV);
+
+	if ($tmp2 ne "" ) {
+	    if (($tmp2 eq "left") || ($tmp2 eq "right")) {
+	    
+		if ($tmp2 eq "left") {
+		    $ylabel  = $tmp1;
+		}
+
+		if ($tmp2 eq "right") {
+		    $ylabel_right  = $tmp1;
+		}
+
+	    } elsif ( index($tmp2,"--") == -1 ) {
+		print "SYNTAX ERROR: --ylabel second option must either be left or right.\n";
+		exit(0);	    
+	    } else {
+		$ylabel  = $tmp1;
+		unshift(@ARGV,$tmp2);
+	    }
+
+	} else {
+	    $ylabel  = $tmp1;
+	}
+
+
+    } elsif ( $in_arg eq "--key" ) {
+
+	$key  = shift(@ARGV);
+
+   } elsif ( $in_arg eq "--outfile" ) {
+
+	$outfile  = shift(@ARGV);
+	$outtype  = shift(@ARGV);
+
+	if ($outtype ne "" ) {
+
+	    if (($outtype eq "eps") || 
+		($outtype eq "png") ||
+		($outtype eq "jpeg") ) {
+
+		#noop
+
+	    } elsif ( index($outtype,"--") == -1 ) {
+		print "SYNTAX ERROR: --outtype second option must be a valid type.\n";
+		exit(0);	    
+	    } else {
+		unshift(@ARGV,$outtype);
+		$outtype  = "eps";
+	    }
+
+	} else {
+	    $outtype  = "eps";
+	}
+
+    } elsif ( $in_arg eq "--file" ) {
+
+# Both of the following are following:
+#        --file <file_name> <plot_label> <column>
+# or 
+#        --set f_n file <file_name> <column>
+#        --plot f_n label
+
+	$in_name   = shift(@ARGV);
+	$in_label  = shift(@ARGV);
+	$in_column = shift(@ARGV);
+
+	if ( ($in_name eq "")   || (index($in_name,"--")  != -1)  || 
+	     ($in_label eq "")  || (index($in_label,"--") != -1)  ||
+	     ($in_column eq "") || (index($in_column,"--")!= -1))  {
+
+	    print "SYNTAX ERROR: --file ($in_name) is missing something dude!!\n";
+	    exit(0);
+	}
+
+	splice(@ARGV,0,0,"--set","F_$file_cnt","file","$in_name","$in_column");
+	splice(@ARGV,0,0,"--plot","F_$file_cnt","$in_label");
+
+	$file_cnt++;
+
+    }  elsif ( $in_arg eq "--set" ) {
+	
+	$in_var = shift(@ARGV);
+	$in_type = shift(@ARGV);
+
+	if ( $in_type eq "file" ) {
+	    
+	    $in_name = shift(@ARGV);
+	    $in_column = shift(@ARGV) - 1;
+
+	    open(FD,"$in_name");
+	    
+	    $cnt = 0;
+	    while(<FD>) {
+		
+		@line = split(/\s+/,$_);
+
+		$var{$in_var}[$cnt]=$line[$in_column];
+		
+		$cnt++;
+	    }
+
+	    $var_cnt{$in_var} = $cnt;
+	    
+	    close(FD);
+	    
+	} elsif ( $in_type eq "range" ) {
+	    
+	    $in_low = shift(@ARGV);
+	    $in_high = shift(@ARGV);
+	    $in_step = shift(@ARGV); 
+
+	    $cnt=0;
+	    for($i=$in_low; $i<=$in_high; $i+=$in_step) {
+		
+		$var{$in_var}[$cnt] = $i;
+		$cnt++;
+	    }
+	    
+	    $var_cnt{$in_var} = $cnt;
+
+	} elsif ( $in_type eq "list" ) {
+
+	    $cnt=0;
+	    $in_val = shift(@ARGV);
+
+	    while ( (index($in_val,"--") == -1 ) && ($in_val ne "") ) {
+		$var{$in_var}[$cnt] = $in_val;
+		$cnt++;
+		$in_val = shift(@ARGV);
+	    }
+	    
+	    $var_cnt{$in_var} = $cnt;
+
+	    if ( index($in_val,"--") != -1 ) {
+		unshift(@ARGV,$in_val);
+	    }
+
+	} elsif ( $in_type eq "avg" ) {
+
+	    $in_column  = shift(@ARGV) - 1;
+	    $in_outlier = shift(@ARGV);
+	    $in_conf    = shift(@ARGV);
+	    $in_name    = shift(@ARGV);
+
+	    $fcnt=0;
+	    $min_rcnt = 99999;
+
+	    while ( (index($in_name,"--") == -1 ) && ($in_name ne "") ) {
+
+		open(FD,"$in_name");
+	    
+		print "$in_name\n";
+
+		$rcnt = 0;
+		while(<FD>) {
+
+		    @line = split(/\s+/,$_);
+
+		    $in_avg[$fcnt][$rcnt]=$line[$in_column];
+		    $rcnt++;
+		}
+		
+		close(FD);
+		
+		if ($rcnt < $min_rcnt) {
+		    $min_rcnt = $rcnt;
+		}
+
+		$in_name = shift(@ARGV); 
+
+		$fcnt++;
+	    }
+	    
+	    if ( index($in_name,"--") != -1 ) {
+		unshift(@ARGV,$in_name);
+	    }
+
+	    $var_cnt{$in_var} = $min_rcnt;
+
+	    # compute the mean and confidence of the columns 
+
+	    if ( $fcnt != 0 ) {
+		
+		for ($j=0;$j<$min_rcnt;$j++) {
+		    
+		    #translate columns into rows
+		    
+		    for ($i=0;$i<$fcnt;$i++) {
+			$tmp_c[$i] = $in_avg[$i][$j];
+		    }
+
+		    @sorted_tmp_c = sort numerically @tmp_c; 
+
+		    $tmp = 0;
+		    for ($i=$in_outlier;$i<$fcnt-$in_outlier;$i++) {
+			$tmp += $sorted_tmp_c[$i];
+		    }
+
+		    $population = $fcnt-2*$in_outlier;
+		    if ( $population > 0 ) {
+			$tmpmean = $tmp/$population; 
+		    } else {
+			$tmpmean = 0;
+		    }
+
+		    $tmpvar = 0;
+		    for ($i=$in_outlier;$i<$fcnt-$in_outlier;$i++) {
+			$tmpvar += ($sorted_tmp_c[$i]-$tmpmean)**2;
+		    }
+		
+		    $var{$in_var}[$j] = $tmpmean;		    
+
+		    if ( (($in_conf == 20) ||
+			 ($in_conf == 40) ||
+			 ($in_conf == 60) ||
+			 ($in_conf == 80) ||
+			 ($in_conf == 90) ||
+			 ($in_conf == 95) ||
+			 ($in_conf == 98) ||
+			 ($in_conf == 99)) && 
+			 ($population > 0) ) {
+
+			if ( ($population-1) < $tdist_infinity ) {
+			    $tval = $tdist{$in_conf}[$population-1];
+			} else {
+			    $tval = $tdist_infinity;
+			}
+			
+			$conf{$in_var}[$j] = $tval*sqrt($tmpvar)/sqrt($population);
+		    }
+		    
+		    undef @tmp_c;
+		    undef @sorted_tmp_c;
+		}
+	    }
+
+	    undef @in_avg;
+
+	} elsif ( $in_type eq "min" ){
+        $in_column  = shift(@ARGV) - 1;
+	    $in_outlier = shift(@ARGV);
+	    $in_conf    = shift(@ARGV);
+	    $in_name    = shift(@ARGV);
+        
+        $fcnt=0;
+	    $min_rcnt = 99999;
+        $minimum = 99999;
+
+	    while ( (index($in_name,"--") == -1 ) && ($in_name ne "") ) {
+
+		open(FD,"$in_name");
+	    
+		print "$in_name\n";
+
+		$rcnt = 0;
+		while(<FD>) {
+
+		    @line = split(/\s+/,$_);
+            if ( $line[$in_column] < $minimum ) {
+                $minimum = $line[$in_column];
+            }
+		    $in_avg[$fcnt][$rcnt]=$line[$in_column];
+		    $rcnt++;
+		}
+		
+		close(FD);
+		
+		if ($rcnt < $min_rcnt) {
+		    $min_rcnt = $rcnt;
+		}
+
+		$in_name = shift(@ARGV); 
+
+		$fcnt++;
+	    }
+        if ( index($in_name,"--") != -1 ) {
+		unshift(@ARGV,$in_name);
+	    }
+
+	    $var_cnt{$in_var} = $minimum;
+
+    } else {
+	    print "SYNTAX ERROR: You wrote something that is not supported ($in_type)\n";
+	}
+	
+    } elsif ( $in_arg eq "--plot" ) {
+
+	$in_func   = shift(@ARGV);
+	$in_label  = shift(@ARGV);
+	$in_axes = shift(@ARGV);
+
+	$in_func =~ s/\s//g; #remove spaces 
+	
+	$func[$func_cnt] = $in_func;  
+	$func_label[$func_cnt] = $in_label;
+
+	if ( $in_axes ne "" ) {
+	    if (($in_axes eq "left") || ($in_axes eq "right")) {
+		$func_axes[$func_cnt] = $in_axes;
+	    } elsif (index($in_axes,"--")==-1) {
+		print "SYNTAX ERROR: --func third option ($in_axes) must either be left or right.\n";
+		exit(0);
+	    } else {
+		$func_axes[$func_cnt] = "left";
+		unshift(@ARGV,$in_axes);
+	    }
+	}
+
+	$func_cnt++;
+	
+    } else {
+	print "SYNTAX ERROR: You wrote something that is not supported ($in_arg)\n";
+	exit(0);
+    }
+}
+
+
+# make sure that all vars have the same number of entries
+# if not find the minumum
+
+foreach $key (sort keys(%var_cnt)) {
+    if ( $var_cnt{$key} < $var_cnt_min ) {
+	$var_cnt_min = $var_cnt{$key};
+    }
+}
+
+foreach $key (sort keys(%var_cnt)) {
+
+    if ( $var_cnt{$key} > $var_cnt_min ) {
+	print "WARNING: variable ($key) is longer than the minimum of all variables\n";
+	print "         will truncate its length to $var_cnt_min\n";
+	$var_cnt{$key} = $var_cnt_min;
+    }
+}
+
+# compute mean, total, variance
+
+foreach $key (sort keys(%var)) {
+
+    for ($i = 0; $i < $var_cnt{$key}; $i++) {
+	$var_total{$key} += $var{$key}[$i];
+    }
+
+    if ($var_cnt{$key} != 0) {
+
+	$var_mean{$key} = $var_total{$key}/$var_cnt{$key};
+	
+	for ($i = 0; $i < $var_cnt{$key}; $i++) {
+	    $var_variance{$key} += ($var{$key}[$i]-$var_mean{$key})**2;
+	}
+    }
+
+#    print "[$key]->";
+#    for ($i = 0; $i < $var_cnt{$key}; $i++) {
+#	print "($var{$key}[$i])->";
+#    }
+#    print "[total=$var_total{$key},mean=$var_mean{$key},variance=$var_variance{$key}]\n";
+
+}
+
+if (!$outfile) {
+    print "SYNTAX ERROR: --outfile option must be specified\n";
+    exit(0);
+}
+
+
+$outdata = $outfile . ".data";
+open (FD,"> $outdata");
+
+for ($i=0; $i<$var_cnt_min; $i += $subsample) {
+
+    for ($j=0; $j<=$#func; $j++) {
+
+	$tmpfunc = $func[$j]; 
+
+	foreach $key (sort keys(%var)) {
+
+	    # first replace the mean, variance, count, and total
+
+	    $tmpfunc =~ s/mean_$key/$var_mean{$key}/gi;
+	    $tmpfunc =~ s/var_$key/$var_variance{$key}/g;
+	    $tmpfunc =~ s/count_$key/$var_cnt{$key}/g;
+	    $tmpfunc =~ s/total_$key/$var_total{$key}/g;
+
+	    # now replace all instances
+	    $tmpfunc =~ s/$key/$var{$key}[$i]/g;
+	}
+
+	$tmp = eval($tmpfunc);
+	
+	if ( defined($conf{$func[$j]})  ) {
+	    printf(FD "%0.3f\t%0.3f\t",$tmp,$conf{$func[$j]}[$i]);
+	} else {
+	    printf(FD "%0.3f\t",$tmp);
+	}
+    }
+
+    print FD "\n";
+}
+
+close(FD);
+
+# Lets do some plotting 
+
+$plot_command = 'plot ';
+
+if ($func_label[0] eq "xaxis") {
+    $j=1;
+} else {
+    $j=0;
+}
+ 
+for ($i=$j; $i <= $#func; $i++ ) {
+
+    $column = $i+1;
+
+    if ( $func_axes[$i] eq "right" ) {
+	$tmpaxes = "x1y2";
+    } else {
+	$tmpaxes = "x1y1";
+    }
+
+    if ( defined($conf{$func[$j]})  ) {
+	$cp1 = $column+1;
+	$plot_command = $plot_command . "\"$outdata\" using 1:$column:$cp1 axes $tmpaxes" .
+	    " title \"$func_label[$i]\" with yerrorbars";
+	$i++;
+    } else {
+	$plot_command = $plot_command . "\"$outdata\" using 1:$column axes $tmpaxes" .
+	    " title \"$func_label[$i]\" with linespoint";
+    }
+    
+    if ( $i < $#func ) {
+	$plot_command = $plot_command . ', ';
+    }
+}
+
+open ( PLOT_FILE, "> $outfile.gnu");
+	
+#print PLOT_FILE  "set terminal postscript eps enhanced \"Helvetica\" 20 \n";
+if ( $outtype eq "jpeg" ) {
+    print PLOT_FILE  "set terminal jpeg\n";
+    print PLOT_FILE  "set output \"$outfile.jpg\"\n";
+} elsif ( $outtype eq "png" ) {
+    print PLOT_FILE  "set terminal png\n";
+    print PLOT_FILE  "set output \"$outfile.png\"\n";
+} else { #default to eps
+    print PLOT_FILE  "set terminal postscript eps\n";
+    print PLOT_FILE  "set output \"$outfile.eps\"\n";
+}
+
+print PLOT_FILE  "set xlabel \"$xlabel\"\n";
+print PLOT_FILE  "set ylabel \"$ylabel\"\n";
+#print PLOT_FILE  "set size .6, .6\n";
+print PLOT_FILE  "set title \"$title\"\n";
+
+if ($key ne "" ) {
+    print PLOT_FILE  "set key $key\n";
+}
+
+if ($x_range ne "" ) {
+    print PLOT_FILE  "set xrange [$x_range]\n";
+}
+
+if ($y_range ne "" ) {
+    print PLOT_FILE  "set yrange [$y_range]\n";
+}
+
+if ($y_range_right ne "" ) {
+    print PLOT_FILE  "set y2range [$y_range_right]\n";
+}
+
+if ($y_tics ne "" ) {
+    print PLOT_FILE  "set ytics $y_tics\n";
+}
+
+if ($y_tics_right ne "" ) {
+    print PLOT_FILE  "set y2tics $y_tics_right\n";
+}
+
+if ($ylabel_right ne "" ) {
+    print PLOT_FILE  "set y2label \"$ylabel_right\"\n";
+}
+
+if ($percent eq "right" ) {
+    print PLOT_FILE  "set y2tics  0,25,100\n";
+    print PLOT_FILE  "set y2range [0:100]\n";
+}
+
+if ($percent eq "left" ) {
+    print PLOT_FILE  "set ytics   0,25,100\n";
+    print PLOT_FILE  "set yrange  [0:100]\n";
+}
+
+if ($percent eq "both" ) {
+    print PLOT_FILE  "set y2tics  0,25,100\n";
+    print PLOT_FILE  "set ytics   0,25,100\n";
+    print PLOT_FILE  "set yrange  [0:100]\n";
+    print PLOT_FILE  "set y2range [0:100]\n";
+}
+
+if ($log_scale eq "x" ) {
+    print PLOT_FILE  "set logscale x\n";
+}
+
+if ($log_scale eq "y" ) {
+    print PLOT_FILE  "set logscale y\n";
+}
+
+if ($log_scale eq "xy" ) {
+    print PLOT_FILE  "set logscale x\n";
+    print PLOT_FILE  "set logscale y\n";
+}
+
+print PLOT_FILE  "$plot_command\n";
+
+close( PLOT_FILE);
+
+`gnuplot $outfile.gnu`;
+
+
+
+
+
+
+
+
