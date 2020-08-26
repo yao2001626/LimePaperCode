@@ -1,0 +1,72 @@
+num: 1000
+init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+
+Crash dump is being written to: erl_crash.dump...done
+
+real	0m0.213s
+user	0m0.145s
+sys	0m0.050s
+num: 2000
+init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+
+Crash dump is being written to: erl_crash.dump...done
+
+real	0m0.216s
+user	0m0.129s
+sys	0m0.063s
+num: 3000
+init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+
+Crash dump is being written to: erl_crash.dump...done
+
+real	0m0.215s
+user	0m0.136s
+sys	0m0.056s
+num: 4000
+init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+
+Crash dump is being written to: erl_crash.dump...done
+
+real	0m0.216s
+user	0m0.148s
+sys	0m0.047s
+num: 5000
+init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+
+Crash dump is being written to: erl_crash.dump...done
+
+real	0m0.216s
+user	0m0.119s
+sys	0m0.088s
+num: 6000
+init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+
+Crash dump is being written to: erl_crash.dump...done
+
+real	0m0.221s
+user	0m0.138s
+sys	0m0.066s
+num: 7000
+init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+
+Crash dump is being written to: erl_crash.dump...done
+
+real	0m0.225s
+user	0m0.139s
+sys	0m0.070s
+num: 8000
+init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+
+Crash dump is being written to: erl_crash.dump...done
+
+real	0m0.215s
+user	0m0.103s
+sys	0m0.091s
+num: 9000
+init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+
+Crash dump is being written to: erl_crash.dump...done
+
+real	0m0.218s
+user	0m0.136s
+sys	0m0.060s

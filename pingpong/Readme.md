@@ -16,6 +16,21 @@ is decremented by both Ping and Pong. The program terminates when it reaches 0.
 The constants used in the implementations are:
 - Rounds: the number of bounces of the ball
 
+# Experimental Environment
+
+The experiments are run on AMD Ryzen Threadripper 1950X 16-CoreProcessor (2.09GHz). 
+
+* OS: Ubuntu 16.4 LTS in single-usermode
+* Gcc: 5.4.0 
+* Java HotSpot: 1.8.0
+* Go: 1.8
+* Erlang: 20
+* GHC: 8.4.2
+* Rust: 1.24.1
+
+This experiment is run thirty times. The results reported here are the average with a 95% confidence interval. The smallest and largest value are regarded as outliers and are deleted.
+
+
 # Result
 
 ![](ex_PingPong.png)

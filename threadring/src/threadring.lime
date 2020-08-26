@@ -1,0 +1,25 @@
+class Node
+  var next: Node
+  var token: int
+  init()
+    token, next := 0, nil
+  method pass(t: int)
+    token := t
+  method setNext(n: Node)
+    next := n
+  action forward
+    when token > 0 do
+      next.pass(token - 1)
+      token := 0
+class Start
+  var nd, nd0, nd1: Node
+  var n: int
+  var hops, nodes: int
+  init()
+    hops := getArg(1)
+    nodes := getArg(2)
+    nd0 := new Node(); nd1 := nd0
+    for n := 1 to nodes do
+      nd := new Node(); nd1.setNext(nd); nd1 := nd
+    nd1.setNext(nd0)
+    nd0.pass(hops)
