@@ -21,13 +21,13 @@ sys	0m0.000s
 num: 5000
 
 real	0m0.003s
-user	0m0.003s
-sys	0m0.000s
+user	0m0.000s
+sys	0m0.003s
 num: 6000
 
 real	0m0.003s
-user	0m0.003s
-sys	0m0.000s
+user	0m0.000s
+sys	0m0.003s
 num: 7000
 
 real	0m0.003s
