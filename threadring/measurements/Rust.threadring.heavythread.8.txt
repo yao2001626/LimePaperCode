@@ -1,63 +1,45 @@
-num: 1000
-thread 'main' panicked at 'index out of bounds: the len is 2 but the index is 2', liballoc/vec.rs:1551:10
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+num: 100
 
-real	0m0.001s
-user	0m0.001s
-sys	0m0.000s
-num: 2000
-thread 'main' panicked at 'index out of bounds: the len is 2 but the index is 2', liballoc/vec.rs:1551:10
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+real	0m0.961s
+user	0m0.742s
+sys	0m0.301s
+num: 200
 
-real	0m0.001s
-user	0m0.001s
-sys	0m0.000s
-num: 3000
-thread 'main' panicked at 'index out of bounds: the len is 2 but the index is 2', liballoc/vec.rs:1551:10
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+real	0m0.979s
+user	0m0.687s
+sys	0m0.389s
+num: 300
 
-real	0m0.001s
-user	0m0.001s
-sys	0m0.000s
-num: 4000
-thread 'main' panicked at 'index out of bounds: the len is 2 but the index is 2', liballoc/vec.rs:1551:10
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+real	0m0.919s
+user	0m0.708s
+sys	0m0.354s
+num: 400
 
-real	0m0.001s
-user	0m0.001s
-sys	0m0.000s
-num: 5000
-thread 'main' panicked at 'index out of bounds: the len is 2 but the index is 2', liballoc/vec.rs:1551:10
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+real	0m0.947s
+user	0m0.648s
+sys	0m0.421s
+num: 500
 
-real	0m0.001s
-user	0m0.001s
-sys	0m0.000s
-num: 6000
-thread 'main' panicked at 'index out of bounds: the len is 2 but the index is 2', liballoc/vec.rs:1551:10
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+real	0m0.933s
+user	0m0.662s
+sys	0m0.413s
+num: 600
 
-real	0m0.001s
-user	0m0.001s
-sys	0m0.000s
-num: 7000
-thread 'main' panicked at 'index out of bounds: the len is 2 but the index is 2', liballoc/vec.rs:1551:10
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+real	0m0.928s
+user	0m0.664s
+sys	0m0.439s
+num: 700
 
-real	0m0.001s
-user	0m0.001s
-sys	0m0.000s
-num: 8000
-thread 'main' panicked at 'index out of bounds: the len is 2 but the index is 2', liballoc/vec.rs:1551:10
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+real	0m0.851s
+user	0m0.665s
+sys	0m0.402s
+num: 800
 
-real	0m0.003s
-user	0m0.000s
-sys	0m0.003s
-num: 9000
-thread 'main' panicked at 'index out of bounds: the len is 2 but the index is 2', liballoc/vec.rs:1551:10
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+real	0m0.909s
+user	0m0.691s
+sys	0m0.402s
+num: 900
 
-real	0m0.002s
-user	0m0.000s
-sys	0m0.002s
+real	0m0.954s
+user	0m0.666s
+sys	0m0.498s

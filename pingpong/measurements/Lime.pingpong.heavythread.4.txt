@@ -5,14 +5,14 @@ user	0m0.001s
 sys	0m0.000s
 num: 2000
 
-real	0m0.002s
-user	0m0.002s
+real	0m0.001s
+user	0m0.001s
 sys	0m0.000s
 num: 3000
 
 real	0m0.002s
-user	0m0.000s
-sys	0m0.002s
+user	0m0.002s
+sys	0m0.000s
 num: 4000
 
 real	0m0.002s
@@ -30,7 +30,7 @@ user	0m0.000s
 sys	0m0.002s
 num: 7000
 
-real	0m0.002s
+real	0m0.003s
 user	0m0.003s
 sys	0m0.000s
 num: 8000

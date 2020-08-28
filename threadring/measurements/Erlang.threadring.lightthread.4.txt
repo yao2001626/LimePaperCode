@@ -1,72 +1,45 @@
-num: 100000
-init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+num: 1000
 
-Crash dump is being written to: erl_crash.dump...done
+real	0m1.217s
+user	0m0.291s
+sys	0m0.067s
+num: 2000
 
-real	0m0.222s
-user	0m0.128s
-sys	0m0.074s
-num: 200000
-init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+real	0m1.219s
+user	0m0.261s
+sys	0m0.110s
+num: 3000
 
-Crash dump is being written to: erl_crash.dump...done
+real	0m1.202s
+user	0m0.262s
+sys	0m0.079s
+num: 4000
 
-real	0m0.207s
-user	0m0.129s
-sys	0m0.054s
-num: 300000
-init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+real	0m1.290s
+user	0m0.378s
+sys	0m0.195s
+num: 5000
 
-Crash dump is being written to: erl_crash.dump...done
+real	0m1.292s
+user	0m0.401s
+sys	0m0.129s
+num: 6000
 
-real	0m0.218s
-user	0m0.113s
-sys	0m0.083s
-num: 400000
-init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+real	0m1.289s
+user	0m0.409s
+sys	0m0.209s
+num: 7000
 
-Crash dump is being written to: erl_crash.dump...done
+real	0m1.327s
+user	0m0.452s
+sys	0m0.182s
+num: 8000
 
-real	0m0.221s
-user	0m0.140s
-sys	0m0.055s
-num: 500000
-init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
+real	0m1.322s
+user	0m0.496s
+sys	0m0.174s
+num: 9000
 
-Crash dump is being written to: erl_crash.dump...done
-
-real	0m0.224s
-user	0m0.150s
-sys	0m0.072s
-num: 600000
-init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
-
-Crash dump is being written to: erl_crash.dump...done
-
-real	0m0.215s
-user	0m0.139s
-sys	0m0.046s
-num: 700000
-init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
-
-Crash dump is being written to: erl_crash.dump...done
-
-real	0m0.220s
-user	0m0.164s
-sys	0m0.045s
-num: 800000
-init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
-
-Crash dump is being written to: erl_crash.dump...done
-
-real	0m0.221s
-user	0m0.128s
-sys	0m0.073s
-num: 900000
-init terminating in do_boot ({{badmatch,error},[{threadring,start,0,[{_},{_}]},{init,start_em,1,[]},{init,do_boot,3,[]}]})
-
-Crash dump is being written to: erl_crash.dump...done
-
-real	0m0.215s
-user	0m0.108s
-sys	0m0.083s
+real	0m1.330s
+user	0m0.469s
+sys	0m0.241s

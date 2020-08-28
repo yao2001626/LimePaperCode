@@ -6,7 +6,7 @@ set output "ex_PingPong.png"
 set multiplot layout 1,2 
 set tmargin at screen 0.1
 set bmargin at screen 0.80
-set lmargin at screen 0.15
+set lmargin at screen 0.10
 set rmargin at screen 0.45
 set xlabel "Tokens"
 set ylabel "Time (ms)"
@@ -17,7 +17,7 @@ set key left top
 
 plot "measurements/Lime.pingpong.heavythread.data" using 1:2 title 'Lime' with linespoints linecolor rgb "red" pointtype 26 pointsize 2, \
     "measurements/Go.pingpong.heavythread.data" using 1:2 title 'Go' with linespoints linecolor rgb "green" pointtype 39 pointsize 2, \
-    "measurements/Erlang.pingpong.heavythread.data" using 1:($2-1140) title 'Erlang' with linespoints linecolor rgb "blue" pointtype 10 pointsize 2, \
+    "measurements/Erlang.pingpong.heavythread.data" using 1:($2-1100) title 'Erlang' with linespoints linecolor rgb "blue" pointtype 10 pointsize 2, \
     "measurements/Java.pingpong.heavythread.data" using 1:2 title 'Java' with linespoints linecolor rgb "coral" pointtype 70 pointsize 2, \
     "measurements/Pthread.pingpong.heavythread.data" using 1:2 title 'Pthread' with linespoints linecolor rgb "#5F9EA0" pointtype 1 pointsize 2, \
     "measurements/Haskell.pingpong.heavythread.data" using 1:2 title 'Haskell' with linespoints linecolor rgb "brown" pointtype 58 pointsize 2, \

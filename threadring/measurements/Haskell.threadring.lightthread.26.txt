@@ -1,54 +1,45 @@
-num: 100000
-threadring_haskell: Prelude.!!: index too large
+num: 1000
 
-real	0m0.002s
-user	0m0.002s
-sys	0m0.000s
-num: 200000
-threadring_haskell: Prelude.!!: index too large
+real	0m0.019s
+user	0m0.014s
+sys	0m0.005s
+num: 2000
 
-real	0m0.002s
-user	0m0.002s
-sys	0m0.000s
-num: 300000
-threadring_haskell: Prelude.!!: index too large
+real	0m0.024s
+user	0m0.017s
+sys	0m0.008s
+num: 3000
 
-real	0m0.002s
-user	0m0.002s
-sys	0m0.000s
-num: 400000
-threadring_haskell: Prelude.!!: index too large
+real	0m0.033s
+user	0m0.025s
+sys	0m0.009s
+num: 4000
 
-real	0m0.002s
-user	0m0.002s
-sys	0m0.000s
-num: 500000
-threadring_haskell: Prelude.!!: index too large
+real	0m0.040s
+user	0m0.031s
+sys	0m0.010s
+num: 5000
 
-real	0m0.002s
-user	0m0.002s
-sys	0m0.000s
-num: 600000
-threadring_haskell: Prelude.!!: index too large
+real	0m0.046s
+user	0m0.043s
+sys	0m0.004s
+num: 6000
 
-real	0m0.002s
-user	0m0.002s
-sys	0m0.000s
-num: 700000
-threadring_haskell: Prelude.!!: index too large
+real	0m0.061s
+user	0m0.051s
+sys	0m0.013s
+num: 7000
 
-real	0m0.002s
-user	0m0.002s
-sys	0m0.000s
-num: 800000
-threadring_haskell: Prelude.!!: index too large
+real	0m0.053s
+user	0m0.042s
+sys	0m0.013s
+num: 8000
 
-real	0m0.002s
-user	0m0.000s
-sys	0m0.002s
-num: 900000
-threadring_haskell: Prelude.!!: index too large
+real	0m0.063s
+user	0m0.056s
+sys	0m0.009s
+num: 9000
 
-real	0m0.002s
-user	0m0.000s
-sys	0m0.002s
+real	0m0.100s
+user	0m0.096s
+sys	0m0.008s

@@ -1,63 +1,45 @@
-num: 1000
-Error: Could not find or load main class threadring
-Caused by: java.lang.ClassNotFoundException: threadring
+num: 100
 
-real	0m0.078s
-user	0m0.092s
-sys	0m0.027s
-num: 2000
-Error: Could not find or load main class threadring
-Caused by: java.lang.ClassNotFoundException: threadring
+real	0m0.905s
+user	0m0.648s
+sys	0m0.367s
+num: 200
 
-real	0m0.079s
-user	0m0.092s
-sys	0m0.029s
-num: 3000
-Error: Could not find or load main class threadring
-Caused by: java.lang.ClassNotFoundException: threadring
+real	0m1.036s
+user	0m0.644s
+sys	0m0.486s
+num: 300
 
-real	0m0.086s
-user	0m0.112s
-sys	0m0.013s
-num: 4000
-Error: Could not find or load main class threadring
-Caused by: java.lang.ClassNotFoundException: threadring
+real	0m1.069s
+user	0m0.745s
+sys	0m0.455s
+num: 400
 
-real	0m0.091s
-user	0m0.104s
-sys	0m0.021s
-num: 5000
-Error: Could not find or load main class threadring
-Caused by: java.lang.ClassNotFoundException: threadring
+real	0m0.968s
+user	0m0.580s
+sys	0m0.570s
+num: 500
 
-real	0m0.078s
-user	0m0.101s
-sys	0m0.021s
-num: 6000
-Error: Could not find or load main class threadring
-Caused by: java.lang.ClassNotFoundException: threadring
+real	0m1.034s
+user	0m0.616s
+sys	0m0.600s
+num: 600
 
-real	0m0.079s
-user	0m0.099s
-sys	0m0.019s
-num: 7000
-Error: Could not find or load main class threadring
-Caused by: java.lang.ClassNotFoundException: threadring
+real	0m1.082s
+user	0m0.704s
+sys	0m0.632s
+num: 700
 
-real	0m0.076s
-user	0m0.102s
-sys	0m0.017s
-num: 8000
-Error: Could not find or load main class threadring
-Caused by: java.lang.ClassNotFoundException: threadring
+real	0m1.123s
+user	0m0.808s
+sys	0m0.580s
+num: 800
 
-real	0m0.078s
-user	0m0.112s
-sys	0m0.012s
-num: 9000
-Error: Could not find or load main class threadring
-Caused by: java.lang.ClassNotFoundException: threadring
+real	0m0.981s
+user	0m0.682s
+sys	0m0.577s
+num: 900
 
-real	0m0.082s
-user	0m0.116s
-sys	0m0.008s
+real	0m1.051s
+user	0m0.737s
+sys	0m0.676s

@@ -1,17 +1,17 @@
 num: 100000
 
-real	0m0.019s
-user	0m0.019s
+real	0m0.020s
+user	0m0.020s
 sys	0m0.000s
 num: 200000
 
 real	0m0.030s
-user	0m0.026s
-sys	0m0.004s
+user	0m0.030s
+sys	0m0.000s
 num: 300000
 
-real	0m0.042s
-user	0m0.042s
+real	0m0.044s
+user	0m0.044s
 sys	0m0.000s
 num: 400000
 
@@ -20,26 +20,26 @@ user	0m0.054s
 sys	0m0.000s
 num: 500000
 
-real	0m0.065s
-user	0m0.065s
+real	0m0.066s
+user	0m0.066s
 sys	0m0.000s
 num: 600000
 
-real	0m0.082s
-user	0m0.082s
+real	0m0.075s
+user	0m0.075s
 sys	0m0.000s
 num: 700000
 
-real	0m0.087s
-user	0m0.087s
+real	0m0.092s
+user	0m0.092s
 sys	0m0.000s
 num: 800000
 
-real	0m0.101s
-user	0m0.101s
-sys	0m0.000s
+real	0m0.103s
+user	0m0.099s
+sys	0m0.004s
 num: 900000
 
-real	0m0.111s
-user	0m0.111s
+real	0m0.114s
+user	0m0.113s
 sys	0m0.000s
