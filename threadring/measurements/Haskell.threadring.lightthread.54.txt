@@ -1,45 +1,45 @@
-num: 1000
+num: 100000
 
-real	0m0.019s
-user	0m0.020s
-sys	0m0.000s
-num: 2000
+real	0m0.421s
+user	0m0.360s
+sys	0m0.090s
+num: 200000
 
-real	0m0.023s
-user	0m0.016s
-sys	0m0.008s
-num: 3000
+real	0m0.942s
+user	0m0.789s
+sys	0m0.199s
+num: 300000
 
-real	0m0.034s
-user	0m0.026s
-sys	0m0.009s
-num: 4000
+real	0m1.451s
+user	0m1.259s
+sys	0m0.288s
+num: 400000
 
-real	0m0.035s
-user	0m0.024s
-sys	0m0.012s
-num: 5000
+real	0m2.080s
+user	0m1.770s
+sys	0m0.407s
+num: 500000
 
-real	0m0.048s
-user	0m0.038s
-sys	0m0.013s
-num: 6000
+real	0m1.814s
+user	0m1.491s
+sys	0m0.428s
+num: 600000
 
-real	0m0.048s
-user	0m0.041s
-sys	0m0.008s
-num: 7000
+real	0m2.029s
+user	0m1.732s
+sys	0m0.415s
+num: 700000
 
-real	0m0.055s
-user	0m0.048s
-sys	0m0.009s
-num: 8000
+real	0m3.453s
+user	0m2.931s
+sys	0m0.654s
+num: 800000
 
-real	0m0.089s
-user	0m0.071s
-sys	0m0.020s
-num: 9000
+real	0m3.342s
+user	0m2.816s
+sys	0m0.625s
+num: 900000
 
-real	0m0.080s
-user	0m0.068s
-sys	0m0.013s
+real	0m3.535s
+user	0m2.965s
+sys	0m0.908s

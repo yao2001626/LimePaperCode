@@ -1,45 +1,66 @@
-num: 1000
+num: 100000
 
-real	0m1.207s
-user	0m0.181s
-sys	0m0.140s
-num: 2000
+real	0m2.167s
+user	0m2.465s
+sys	0m1.147s
+num: 200000
 
-real	0m1.228s
-user	0m0.274s
-sys	0m0.102s
-num: 3000
+real	0m2.929s
+user	0m5.483s
+sys	0m2.270s
+num: 300000
+init terminating in do_boot ({system_limit,[{erlang,spawn_link,[erlang,apply,[_]],[]},{erlang,spawn_link,1,[]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,sta
 
-real	0m1.237s
-user	0m0.328s
-sys	0m0.110s
-num: 4000
+Crash dump is being written to: erl_crash.dump...done
 
-real	0m1.252s
-user	0m0.404s
-sys	0m0.102s
-num: 5000
+real	0m1.551s
+user	0m1.728s
+sys	0m0.812s
+num: 400000
+init terminating in do_boot ({system_limit,[{erlang,spawn_link,[erlang,apply,[_]],[]},{erlang,spawn_link,1,[]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,sta
 
-real	0m1.250s
-user	0m0.333s
-sys	0m0.112s
-num: 6000
+Crash dump is being written to: erl_crash.dump...done
 
-real	0m1.289s
-user	0m0.425s
-sys	0m0.198s
-num: 7000
+real	0m1.613s
+user	0m1.684s
+sys	0m0.959s
+num: 500000
+init terminating in do_boot ({system_limit,[{erlang,spawn_link,[erlang,apply,[_]],[]},{erlang,spawn_link,1,[]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,sta
 
-real	0m1.308s
-user	0m0.421s
-sys	0m0.168s
-num: 8000
+Crash dump is being written to: erl_crash.dump...done
 
-real	0m1.345s
-user	0m0.494s
-sys	0m0.221s
-num: 9000
+real	0m1.599s
+user	0m1.873s
+sys	0m0.689s
+num: 600000
+init terminating in do_boot ({system_limit,[{erlang,spawn_link,[erlang,apply,[_]],[]},{erlang,spawn_link,1,[]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,sta
 
-real	0m1.343s
-user	0m0.518s
-sys	0m0.192s
+Crash dump is being written to: erl_crash.dump...done
+
+real	0m1.488s
+user	0m1.551s
+sys	0m0.936s
+num: 700000
+init terminating in do_boot ({system_limit,[{erlang,spawn_link,[erlang,apply,[_]],[]},{erlang,spawn_link,1,[]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,sta
+
+Crash dump is being written to: erl_crash.dump...done
+
+real	0m1.456s
+user	0m1.506s
+sys	0m0.886s
+num: 800000
+init terminating in do_boot ({system_limit,[{erlang,spawn_link,[erlang,apply,[_]],[]},{erlang,spawn_link,1,[]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,sta
+
+Crash dump is being written to: erl_crash.dump...done
+
+real	0m1.731s
+user	0m1.750s
+sys	0m0.992s
+num: 900000
+init terminating in do_boot ({system_limit,[{erlang,spawn_link,[erlang,apply,[_]],[]},{erlang,spawn_link,1,[]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,spawn_nodes,3,[{_},{_}]},{threadring,sta
+
+Crash dump is being written to: erl_crash.dump...done
+
+real	0m1.529s
+user	0m1.665s
+sys	0m0.791s
