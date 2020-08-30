@@ -20,7 +20,7 @@ The constants used in the implementations are:
 
 The experiments are run on AMD Ryzen Threadripper 1950X 16-CoreProcessor (2.09GHz). 
 
-* OS: Ubuntu 16.4 LTS in single-usermode
+* OS: Ubuntu 16.4 LTS in single-user mode
 * Gcc: 5.4.0 
 * Java HotSpot: 1.8.0
 * Go: 1.8
@@ -28,7 +28,7 @@ The experiments are run on AMD Ryzen Threadripper 1950X 16-CoreProcessor (2.09GH
 * GHC: 8.4.2
 * Rust: 1.24.1
 
-This experiment is run thirty times. The results reported here are the average with a 95% confidence interval. The smallest and largest value are regarded as outliers and are deleted.
+This experiment is run sixty times. The results reported here are the average with a 95% confidence interval. The smallest and largest value are regarded as outliers and are deleted.
 
 
 # Result
