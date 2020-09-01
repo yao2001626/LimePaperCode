@@ -8,11 +8,11 @@ set tmargin at screen 0.1
 set bmargin at screen 0.80
 set lmargin at screen 0.13
 set rmargin at screen 0.60
-set xlabel "Tokens"
+set xlabel "Tokens (10^3)" offset -1,0.5,0
 set ylabel "Time (ms)"
+set format x "%2.0t"
 set xrange [1000:9000]
-set xtics rotate by -75 offset -1,0.5,0
-
+#set xtics rotate by -75 offset -1,0.5,0
 set key left top
 #set key height 1
 #set key width 0.2
@@ -30,9 +30,9 @@ plot "measurements/Lime.pingpong.heavythread.data" using 1:2 title 'Lime' with l
     "measurements/Rust.pingpong.heavythread.data" using 1:2 title 'Rust' with linespoints linecolor rgb 'gold' pointtype 50 pointsize 2        
 set lmargin at screen 0.70
 set rmargin at screen 0.99
-set xlabel "Tokens"
-#set ylabel "Time (ms)" offset 3,20,0
-set xtics rotate by -75 offset -1,0.5,0
+set xlabel "Tokens (10^5)" offset -1,0.5,0
+#set format x "%t"
+set format x "%2.0t"
 set xrange [100000:900000]
 unset key
 #set key left top
