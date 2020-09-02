@@ -30,7 +30,7 @@ The experiments are run on AMD Ryzen Threadripper 1950X 16-CoreProcessor (2.09GH
 
 This experiment is run sixty times. The results reported here are the average with a 95% confidence interval. 
 
-Due to the starting up time of the VM, the starting up time (1100) is subtracted from the total execution time for the Erlang implementation. 
+Due to the starting up time of the VM, the starting up time (1100ms) is subtracted from the total execution time for the Erlang implementation. 
 
 
 # Result
