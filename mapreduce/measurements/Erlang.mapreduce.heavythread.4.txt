@@ -1,0 +1,45 @@
+num: 1000
+
+real	0m1.560s
+user	0m12.830s
+sys	0m0.530s
+num: 2000
+
+real	0m2.458s
+user	0m40.720s
+sys	0m0.945s
+num: 3000
+
+real	0m3.142s
+user	0m58.250s
+sys	0m1.465s
+num: 4000
+
+real	0m4.538s
+user	1m36.930s
+sys	0m2.081s
+num: 5000
+
+real	0m5.457s
+user	2m4.926s
+sys	0m3.042s
+num: 6000
+
+real	0m6.028s
+user	2m22.013s
+sys	0m3.665s
+num: 7000
+
+real	0m6.545s
+user	2m36.576s
+sys	0m4.346s
+num: 8000
+
+real	0m6.799s
+user	2m44.043s
+sys	0m4.733s
+num: 9000
+
+real	0m7.410s
+user	3m5.881s
+sys	0m5.172s

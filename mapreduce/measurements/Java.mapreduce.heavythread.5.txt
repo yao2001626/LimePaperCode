@@ -1,0 +1,63 @@
+num: 1000
+Error: Could not find or load main class mapreduce
+Caused by: java.lang.ClassNotFoundException: mapreduce
+
+real	0m0.076s
+user	0m0.097s
+sys	0m0.019s
+num: 2000
+Error: Could not find or load main class mapreduce
+Caused by: java.lang.ClassNotFoundException: mapreduce
+
+real	0m0.082s
+user	0m0.099s
+sys	0m0.022s
+num: 3000
+Error: Could not find or load main class mapreduce
+Caused by: java.lang.ClassNotFoundException: mapreduce
+
+real	0m0.077s
+user	0m0.099s
+sys	0m0.016s
+num: 4000
+Error: Could not find or load main class mapreduce
+Caused by: java.lang.ClassNotFoundException: mapreduce
+
+real	0m0.086s
+user	0m0.091s
+sys	0m0.038s
+num: 5000
+Error: Could not find or load main class mapreduce
+Caused by: java.lang.ClassNotFoundException: mapreduce
+
+real	0m0.079s
+user	0m0.106s
+sys	0m0.018s
+num: 6000
+Error: Could not find or load main class mapreduce
+Caused by: java.lang.ClassNotFoundException: mapreduce
+
+real	0m0.082s
+user	0m0.113s
+sys	0m0.012s
+num: 7000
+Error: Could not find or load main class mapreduce
+Caused by: java.lang.ClassNotFoundException: mapreduce
+
+real	0m0.089s
+user	0m0.109s
+sys	0m0.011s
+num: 8000
+Error: Could not find or load main class mapreduce
+Caused by: java.lang.ClassNotFoundException: mapreduce
+
+real	0m0.086s
+user	0m0.102s
+sys	0m0.017s
+num: 9000
+Error: Could not find or load main class mapreduce
+Caused by: java.lang.ClassNotFoundException: mapreduce
+
+real	0m0.085s
+user	0m0.105s
+sys	0m0.019s
