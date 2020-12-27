@@ -1,4 +1,4 @@
-ParallelThreadRing Benchmark
+# ParallelThreadRing Benchmark
 
 The ParallelThreadRing problem is used in
 https://github.com/berkus/theron/tree/master/Benchmarks/ParallelThreadRing to
@@ -15,6 +15,6 @@ benchmark evaluates the efficiency of context-switching and allocating a
 processor cores to ready processes.
 
 The constants used in the implementations are:
-- Hops: the number of hops the token takes
-- Nodes: the number of nodes in the ring
-- Tokens: the number of tokens initially in the ring
+1. Hops: the number of hops the token takes
+2. Nodes: the number of nodes in the ring
+3. Tokens: the number of tokens initially in the ring

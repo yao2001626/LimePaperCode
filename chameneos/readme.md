@@ -1,4 +1,4 @@
-Chameneos Benchmark
+# Chameneos Benchmark
 
 The Chameneos concurrency game was proposed in
 https://doi.org/10.1109/AICCSA.2003.1227495 (also at
@@ -24,5 +24,5 @@ the clients. The communication structure is many-to-one, leading to contention
 on the server.
 
 The constants used in the implementations are:
-- Chams: the number of chameneos
-- Rounds: how ofter each chamenos competes at the mall
+1. Chams: the number of chameneos
+2. Rounds: how ofter each chamenos competes at the mall

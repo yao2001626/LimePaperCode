@@ -1,4 +1,4 @@
-Big Benchmark
+# Big Benchmark
 
 Big is a synthetic benchmark used in https://doi.org/10.1145/2364489.236449 and
 https://doi.org/10.1145/2687357.2687368 for evaluating the performance of
@@ -24,6 +24,6 @@ values, all successive "random" values fit within 31 bits, i.e. are
 representable as signed 32-bit integers.
 
 The constants used in the implementations are:
-- Workers: the number of workers in each neighbourhood
-- Neighbourhoods: the number of neighbourhoods
-- Rounds: the number of pings each worker sends
+1. Workers: the number of workers in each neighbourhood
+2. Neighbourhoods: the number of neighbourhoods
+3. Rounds: the number of pings each worker sends
