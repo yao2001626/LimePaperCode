@@ -1,0 +1,64 @@
+/* Compile under Linux with "limec chameneos.lime"; run with
+"./chameneos".
+
+Both the chameneos and the mall are represented as active objects: each chameneos
+has an action that, when enabled, calls the mall, which enables an action in
+the mall that calls (later) back the chameneos with the color of the other
+chameneos.
+
+A Lime program terminates when the main program terminates and all actions of
+all objects are disabled. Here, when the mall is done pairing chameneos, it
+replies to each further request by sending - 1 instead of a color, which puts
+the chameneos in a state in which no action is enabled. Once all chameneos are
+disabled, the mall has no enabled actions either and the program terminates.
+*/
+
+const Chams = 100
+const Meets = 1000
+
+class Chameneos
+  var s: {InForest, DoneAtMall, Done}
+  var col: int
+  var mall: Mall
+  init(c: int, m: Mall)
+    col, mall, s := c, m, InForest
+  method meet(otherCol: int)
+    if col < 0 then s := Done
+    else
+      if col != otherCol then col := 3 - col - otherCol
+      s := DoneAtMall
+  action GoingToMall
+    when s = InForest do
+      mall.arrive(this, col)
+  action BackToForest
+    when s = DoneAtMall do
+      s := InForest
+
+class Mall
+  var s: {ZeroCham, OneCham, TwoCham}
+  var fstCol, sndCol: int
+  var fstCham, sndCham: Chameneos
+  var r, diff: int
+  init()
+    s, r, diff := ZeroCham, Chams * Meets / 2, 0
+  method arrive(ch: Chameneos, c: int)
+    when s = ZeroCham or (s = OneCham and r > 0) do
+      if s = ZeroCham then
+        fstCol, fstCham, s := c, ch, OneCham
+      else
+        sndCol, sndCham, s := c, ch, TwoCham
+  action mutate
+    when s = TwoCham and r > 0 do
+      fstCham.meet(sndCol); sndCham.meet(fstCol)
+      if fstCol != sndCol then diff := diff + 1
+      r, s := r - 1, ZeroCham
+      if r = 0 then print(diff)
+  action done
+    when s = OneCham and r = 0 do
+      fstCham.meet(- 1); s := ZeroCham
+
+class Start
+  var m: Mall
+  init()
+    m := new Mall()
+    for i := 1 to Chams do new Chameneos(i % 3, m)

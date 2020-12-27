@@ -1,0 +1,56 @@
+/* Compile under Linux with
+"limec parallelthreadring.lime -o parallelthreadring"; run with
+"./parallelthreadring 1000 100 1".
+
+The number of the worker threads is set to 1.
+Each node is represented as an active object: each node has an action, forward,
+that forwards the token to the successor and has a method, pass, that is called
+by the predecessor.
+
+A Lime program terminates when the main program terminates and all actions of
+all objects are disabled. Here, when the token reaches 0, all objects are
+disabled and the program terminates.
+*/
+
+class Node
+  var next: Node
+  var token: int
+  var count: Counter
+  init()
+    token, count, next := 0, 0, nil
+  method pass(t: int, c: Counter)
+    token, count := t, c
+  method setNext(n: Node)
+    next := n
+  action forward
+    when token >= 0 do
+      if token > 0 then
+        next.pass(token - 1, count)
+      else
+        count.dec()
+      token := -1
+class Counter
+  var count: int
+  init(c: int)
+    count := c
+  method dec()
+    when count > 0 do
+      count := count - 1
+  method zero()
+    when count = 0 do exit()
+class Start
+  var nd, nd0, nd1: Node
+  var count: Counter
+  var n, t: int
+  var nodes, tokens: int
+  init()
+    nodes := getArg(1)
+    tokens := getArg(2)
+    count := new Counter(tokens)
+    nd0 := new Node();
+    nd1 := nd0
+    for n := 0 to nodes - 1 do
+      nd := new Node(); nd1.setNext(nd); nd1 := nd
+    nd1.setNext(nd0)
+    for t := 0 to tokens - 1 do nd0.pass(100000, count)
+    count.zero()
