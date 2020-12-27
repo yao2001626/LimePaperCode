@@ -35,4 +35,4 @@ The source code of the paper ""
 
 ### Status:
 
-![amd64 build status badge](https://github.com/yao2001626/LimePaperCode/actions/CI/badge.svg)
+![amd64 build status badge](https://github.com/yao2001626/LimePaperCode/workflows/.github/workflows/blank.yml/badge.svg)
