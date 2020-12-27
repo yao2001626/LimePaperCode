@@ -34,4 +34,4 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-          ./priorityqueue/bin/PQ_go InputData/ 10 2
+          ./priorityqueue/bin/PQ_go InputData/ 9 2
