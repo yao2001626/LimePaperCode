@@ -35,5 +35,7 @@ bin/%.class: src/threadring.java
 	javac -d bin $<   
 bin/threadring_lime: src/threadring.lime
 	cd src && limec threadring.lime -o ../bin/threadring_lime
+
 .PHONY: clean
-	rm threadring*   
+	rm threadring* 
+	rm *.class  

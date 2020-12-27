@@ -12,26 +12,27 @@ MODULES = $(patsubst $(IDIR)/%.hs, $(ODIR)/%, $(wildcard $(IDIR)/*.hs))
 
 all: bin/Chameneos_go bin/Chameneos_haskell bin/Chameneos_pthread  bin/Chameneos.beam bin/%.class 
 
-bin/Chameneos_haskell: src/Chameneos.hs
+bin/Chameneos_haskell: src/chameneos.hs
 	$(GHC) $(FLAGS)  -o $@ $<
 
-#bin/Chameneos_lime: src/Chameneos.lime
+#bin/Chameneos_lime: src/chameneos.lime
 #	limec -o $@ $<
 
-bin/Chameneos_go: src/Chameneos.go
+bin/Chameneos_go: src/chameneos.go
 	go build -o $@ $<
 
-bin/Chameneos_pthread: src/Chameneos.c
+bin/Chameneos_pthread: src/chameneos.c
 	gcc -pthread -o $@ $<
 
-#bin/Chameneos_rust: src/Chameneos.rs
-#	rustc -o $@ $<
+bin/Chameneos_rust: src/chameneos.rs
+	rustc -o $@ $<
 
-bin/Chameneos.beam: src/Chameneos.erl
+bin/Chameneos.beam: src/chameneos.erl
 	erlc -W -o bin $<
-bin/%.class: src/Chameneos.java
+
+bin/%.class: src/chameneos.java
 	javac -d bin $<   
-#bin/Chameneos_lime: src/Chameneos.lime
-#	cd src && limec Chameneos.lime -o ../bin/Chameneos_lime
+
 .PHONY: clean
-	rm bin/Chameneos*   
+	rm bin/Chameneos*
+	rm *.class   

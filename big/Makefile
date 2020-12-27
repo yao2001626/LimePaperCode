@@ -10,28 +10,28 @@ IDIR    = src
 ODIR    = bin
 MODULES = $(patsubst $(IDIR)/%.hs, $(ODIR)/%, $(wildcard $(IDIR)/*.hs))
 
-all: bin/BIG_go bin/BIG_haskell bin/BIG_pthread  bin/BIG.beam bin/%.class 
+all: bin/BIG_go  bin/BIG_pthread  bin/BIG.beam bin/%.class #bin/big_haskell
 
-bin/BIG_haskell: src/BIG.hs
-	$(GHC) $(FLAGS)  -o $@ $<
+#bin/big_haskell: src/big.hs
+#	$(GHC) $(FLAGS)  -o $@ $<
 
-#bin/BIG_lime: src/BIG.lime
+#bin/big_lime: src/big.lime
 #	limec -o $@ $<
 
-bin/BIG_go: src/BIG.go
+bin/BIG_go: src/big.go
 	go build -o $@ $<
 
-bin/BIG_pthread: src/BIG.c
+bin/BIG_pthread: src/big.c
 	gcc -pthread -o $@ $<
 
 #bin/BIG_rust: src/BIG.rs
 #	rustc -o $@ $<
 
-bin/BIG.beam: src/BIG.erl
+bin/BIG.beam: src/big.erl
 	erlc -W -o bin $<
-bin/%.class: src/BIG.java
+
+bin/%.class: src/big.java
 	javac -d bin $<   
-#bin/BIG_lime: src/BIG.lime
-#	cd src && limec BIG.lime -o ../bin/BIG_lime
+
 .PHONY: clean
 	rm bin/BIG*   
