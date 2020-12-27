@@ -30,3 +30,7 @@ The source code of the paper ""
 ## Parallel Thread Ring
 
 []()
+
+[]()
+
+[![amd64 build status badge](https://github.com/yao2001626/LimePaperCode/workflows/CI/badge.svg)]
