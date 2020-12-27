@@ -27,7 +27,7 @@ set lmargin at screen 0.65
 set rmargin at screen 0.95
 set xlabel "Nodes"
 #set ylabel "Time (ms)" offset 3,20,0
-set xtics rotate by -75 offset -1,0.5,0
+set xtics rotate by -75 offset -1,0.8,0
 set xrange [100000:900000]
 unset key
 
